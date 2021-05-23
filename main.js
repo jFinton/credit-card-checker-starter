@@ -26,24 +26,31 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 // Add your functions below:
 validateCred = arr => {
   // placing the array in a checking array for calculations
-  checkArr = [];
+  const checkArr = [];
+  let counter = 1;
   for (let i = arr.length - 1; i >= 0; i--) {
     //If the index is odd, push it through, else we double and check
-    if (i % 2 !== 0) {
+    if (counter % 2 !== 0) {
         checkArr.push(arr[i]);
     } else {
         let checkVal = arr[i] * 2;
         if (checkVal > 9) { checkVal -= 9};
         checkArr.push(checkVal);
     }
+    counter++;
   }
   const totalSum = checkArr.reduce((accumulator, currentVal) => { return accumulator + currentVal; });
   // Sum must have a remainder of 0 when divided by 10 to be valid
   return totalSum % 10 === 0 ?  true :  false;
 }
 
-console.log(validateCred(valid4));
-console.log(validateCred(invalid5));
+findInvalidCards = arr => {
+    invalidArr = [];
+    arr.forEach(card => {
+        if (validateCred(card) === false) { invalidArr.push(card)};
+    })
+    return invalidArr;
+}
 
 
 
