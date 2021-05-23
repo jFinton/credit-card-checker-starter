@@ -52,16 +52,29 @@ findInvalidCards = arr => {
     return invalidArr;
 }
 
+idInvalidCardCompanies = arr => {
+    companies = [];
+    arr.forEach(card => {
+        switch (card[0]) {
+            case 3:
+                if (!(companies.includes('Amex (American Express)'))) { companies.push('Amex (American Express)')};
+                break;
+            case 4:
+                if (!(companies.includes('Visa'))) { companies.push('Visa')};
+                break;
+            case 5:
+                if (!(companies.includes('Mastercard'))) { companies.push('Mastercard')};
+                break;
+            case 6:
+                if (!(companies.includes('Discover'))) { companies.push('Discover')};
+                break;
+            default:
+                console.log('Company not found.');
+                break;
+        }
+    })
+    return companies;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+const invalidCards = findInvalidCards(batch);
+console.log(idInvalidCardCompanies(invalidCards));
